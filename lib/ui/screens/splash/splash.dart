@@ -11,7 +11,7 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
-  // run initstate only one before build
+  // run init state only one before build
   @override
   void initState() {
     // TODO: implement initState
@@ -28,13 +28,10 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     print('build'); // build method in emlator run 2 times
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(AppAssets.splash),
-            fit: BoxFit.cover,
-          ),
-        ),
+      body: Image.asset(
+        AppAssets.splash,
+        fit: BoxFit.cover,
+        width: double.infinity,
       ),
     );
   }
