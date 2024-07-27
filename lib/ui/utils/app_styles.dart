@@ -7,4 +7,9 @@ abstract class AppStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.accentColor,
   );
+  static const TextStyle titleTextStyle = TextStyle(
+    fontSize: 25,
+    fontWeight: FontWeight.w600,
+    color: AppColors.accentColor,
+  );
 }
