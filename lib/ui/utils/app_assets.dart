@@ -8,4 +8,6 @@ abstract class AppAssets {
   static const String icRadio = "${assetsPath}ic_radio.png";
   static const String quranTabLogo = "${assetsPath}quran_tab_logo.png";
   static const String ahadethTabLogo = "${assetsPath}ahadeth_tab_logo.png";
+  static const String headOfSebha = "${assetsPath}head_sebha.png";
+  static const String bodyOfSebha = "${assetsPath}body_sebha.png";
 }

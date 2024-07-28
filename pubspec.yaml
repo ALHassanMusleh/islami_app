@@ -63,6 +63,7 @@ flutter:
      - assets/images/
      - assets/files/quran/
      - assets/files/ahadeth/
+     - assets/images/body_sebha.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
