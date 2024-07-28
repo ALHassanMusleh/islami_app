@@ -22,6 +22,7 @@ class AppScaffold extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.transparent,
         appBar: AppBar(
+          foregroundColor: AppColors.accentColor,
           backgroundColor: AppColors.transparent,
           elevation: 0,
           title: Text(

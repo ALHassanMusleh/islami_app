@@ -1,4 +1,5 @@
 abstract class AppConstans {
+  static const String hadethFilePath = "assets/files/ahadeth/ahadeth.txt";
   static const List<String> suraNames = [
     "الفاتحه","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود"
     ,"يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون"
