@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/model/suta_details_args.dart';
+import 'package:islami_app/ui/screens/sura_details/sura_details.dart';
 import 'package:islami_app/ui/utils/app_assets.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:islami_app/ui/utils/app_constans.dart';
@@ -78,22 +80,30 @@ class Quran extends StatelessWidget {
   }
 
   Widget buildSuraList() => ListView.builder(
-        itemBuilder: (context, index) => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(
-                child: Text(
-              '${AppConstans.suraNames[index]}',
-              style: AppStyles.titleTextStyle,
-              textAlign: TextAlign.center,
-            )),
-            Expanded(
-                child: Text(
-              '${AppConstans.versesNumber[index]}',
-              style: AppStyles.titleTextStyle,
-              textAlign: TextAlign.center,
-            )),
-          ],
+        itemBuilder: (context, index) => InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, SuraDetails.routeName,
+                arguments: SuraDetailsArgs(
+                    suraName: AppConstans.suraNames[index],
+                    fileName: '${index + 1}.txt'));
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                  child: Text(
+                '${AppConstans.suraNames[index]}',
+                style: AppStyles.titleTextStyle,
+                textAlign: TextAlign.center,
+              )),
+              Expanded(
+                  child: Text(
+                '${AppConstans.versesNumber[index]}',
+                style: AppStyles.titleTextStyle,
+                textAlign: TextAlign.center,
+              )),
+            ],
+          ),
         ),
         itemCount: AppConstans.suraNames.length,
       );
