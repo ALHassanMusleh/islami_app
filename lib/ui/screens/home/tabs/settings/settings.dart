@@ -49,12 +49,14 @@ class _SettingsState extends State<Settings> {
             borderRadius: BorderRadius.circular(10)),
         child: DropdownButton(
           // value: selectedLanguage,
-          value: provider.locale,
+          // value: provider.locale,
+          value: provider.selectedLanguage,
           onChanged: (value) {
             // selectedLanguage = value ?? selectedLanguage;
-            provider.locale = value ?? provider.locale;
-            provider.notifyListeners();
-            setState(() {});
+            // provider.locale = value ?? provider.locale;
+            // provider.notifyListeners();
+            // setState(() {});
+            provider.newLanguage = value ?? provider.selectedLanguage;
             print(value);
           },
           isExpanded: true, //Expanded drop down as with

@@ -10,8 +10,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
-    create: (_) => LanguageProvider(),
-  child: const MyApp()));
+      create: (_) => LanguageProvider(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -31,6 +30,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: false,
       ),
+      // darkTheme: ThemeData(
+      //
+      // ),
+      // themeMode: ThemeMode.,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -41,7 +44,7 @@ class MyApp extends StatelessWidget {
         Locale('ar'), // Arabic
         Locale('en'), // English
       ],
-      locale: Locale(provider.locale),
+      locale: Locale(provider.selectedLanguage),
       debugShowCheckedModeBanner: false,
       routes: {
         Splash.routeName: (_) => const Splash(),
