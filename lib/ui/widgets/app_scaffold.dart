@@ -15,7 +15,9 @@ class AppScaffold extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(AppAssets.lightBackground),
+          image: AssetImage(
+            AppAssets.lightBackground,
+          ),
           fit: BoxFit.cover,
         ),
       ),

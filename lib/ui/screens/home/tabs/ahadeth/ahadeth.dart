@@ -6,6 +6,7 @@ import 'package:islami_app/ui/utils/app_assets.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:islami_app/ui/utils/app_constans.dart';
 import 'package:islami_app/ui/utils/app_styles.dart';
+import 'package:islami_app/ui/utils/extensions/build_context_extensions.dart';
 
 class Ahadeth extends StatefulWidget {
   const Ahadeth({super.key});
@@ -50,11 +51,11 @@ class _AhadethState extends State<Ahadeth> {
                   const SizedBox(
                     height: 8,
                   ),
-                  const Row(
+                  Row(
                     children: [
                       Expanded(
                         child: Text(
-                          "Name",
+                          context.local.hadethName,
                           textAlign: TextAlign.center,
                           style: AppStyles.titleTextStyle,
                         ),

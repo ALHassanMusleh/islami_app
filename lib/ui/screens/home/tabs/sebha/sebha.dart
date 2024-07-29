@@ -19,6 +19,7 @@ class _SebhaState extends State<Sebha> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
           flex: 6,
@@ -38,8 +39,8 @@ class _SebhaState extends State<Sebha> {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.topCenter,
+              Positioned(
+                top: 10,
                 child: Image.asset(
                   AppAssets.headOfSebha,
                 ),

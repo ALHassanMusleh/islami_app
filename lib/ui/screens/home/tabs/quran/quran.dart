@@ -5,6 +5,7 @@ import 'package:islami_app/ui/utils/app_assets.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:islami_app/ui/utils/app_constans.dart';
 import 'package:islami_app/ui/utils/app_styles.dart';
+import 'package:islami_app/ui/utils/extensions/build_context_extensions.dart';
 
 class Quran extends StatelessWidget {
   const Quran({super.key});
@@ -38,19 +39,19 @@ class Quran extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  const Row(
+                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Expanded(
                         child: Text(
-                          'Name',
+                          context.local.suraName,
                           style: AppStyles.titleTextStyle,
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Expanded(
                         child: Text(
-                          'Verses',
+                          context.local.verses,
                           style: AppStyles.titleTextStyle,
                           textAlign: TextAlign.center,
                         ),

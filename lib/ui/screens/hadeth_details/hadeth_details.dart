@@ -4,7 +4,7 @@ import 'package:islami_app/model/hadeth.dart';
 import 'package:islami_app/model/suta_details_args.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:islami_app/ui/utils/app_styles.dart';
-import 'package:islami_app/ui/wisgets/app_scaffold.dart';
+import 'package:islami_app/ui/widgets/app_scaffold.dart';
 
 class HadethDetails extends StatefulWidget {
   static const String routeName = 'HadethDetails';
