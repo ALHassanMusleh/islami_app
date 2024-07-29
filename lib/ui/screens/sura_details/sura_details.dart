@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/model/suta_details_args.dart';
+import 'package:islami_app/ui/providers/theme_provider.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:islami_app/ui/utils/app_styles.dart';
 import 'package:islami_app/ui/widgets/app_scaffold.dart';
+import 'package:provider/provider.dart';
 
 class SuraDetails extends StatefulWidget {
   static const String routeName = 'SuraDetails';
@@ -15,11 +17,12 @@ class SuraDetails extends StatefulWidget {
 
 class _SuraDetailsState extends State<SuraDetails> {
   late SuraDetailsArgs args;
-
+  late ThemeProvider themeProvider;
   String fileContent = "";
 
   @override
   Widget build(BuildContext context) {
+    themeProvider = Provider.of(context);
     print('build');
     args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
     print(args.fileName);
@@ -53,16 +56,16 @@ class _SuraDetailsState extends State<SuraDetails> {
           width: MediaQuery.of(context).size.width * .9,
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: themeProvider.containerColor,
             borderRadius: BorderRadius.circular(25),
           ),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 if (args.suraName != "التوبة")
-                  const Text(
+                   Text(
                     'بسم الله الرحمن الرحيم',
-                    style: AppStyles.titleTextStyle,
+                    style: Theme.of(context).textTheme.displayLarge,
                   ),
                 const Divider(
                   thickness: 3,
@@ -73,7 +76,7 @@ class _SuraDetailsState extends State<SuraDetails> {
                   fileContent,
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.center,
-                  style: AppStyles.titleTextStyle.copyWith(fontSize: 20),
+                  style: Theme.of(context).textTheme.displayLarge!.copyWith(fontSize: 20),
                 ),
               ],
             ),

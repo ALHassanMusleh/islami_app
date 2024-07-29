@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/model/hadeth.dart';
 import 'package:islami_app/model/suta_details_args.dart';
+import 'package:islami_app/ui/providers/theme_provider.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:islami_app/ui/utils/app_styles.dart';
 import 'package:islami_app/ui/widgets/app_scaffold.dart';
+import 'package:provider/provider.dart';
 
 class HadethDetails extends StatefulWidget {
   static const String routeName = 'HadethDetails';
@@ -15,8 +17,10 @@ class HadethDetails extends StatefulWidget {
 }
 
 class _HadethDetailsState extends State<HadethDetails> {
+  late ThemeProvider themeProvider;
   @override
   Widget build(BuildContext context) {
+    themeProvider = Provider.of(context);
     Hadeth hadeth = ModalRoute.of(context)!.settings.arguments as Hadeth;
     return AppScaffold(
         appBarTitle: hadeth.title, body: buildHadethContent(hadeth.content));
@@ -28,13 +32,17 @@ class _HadethDetailsState extends State<HadethDetails> {
           width: MediaQuery.of(context).size.width * .8,
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(25)),
+              color: themeProvider.containerColor,
+              borderRadius: BorderRadius.circular(25)),
           child: SingleChildScrollView(
             child: Text(
               content,
               textAlign: TextAlign.center,
               textDirection: TextDirection.rtl,
-              style: AppStyles.titleTextStyle.copyWith(fontSize: 16),
+              style: Theme.of(context)
+                  .textTheme
+                  .displayLarge!
+                  .copyWith(fontSize: 20),
             ),
           ),
         ),

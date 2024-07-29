@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/ui/utils/app_assets.dart';
-import 'package:islami_app/ui/utils/app_colors.dart';
+import 'package:islami_app/ui/providers/theme_provider.dart';
+
 import 'package:islami_app/ui/utils/app_constans.dart';
-import 'package:islami_app/ui/utils/app_styles.dart';
+import 'package:provider/provider.dart';
 
 class Sebha extends StatefulWidget {
   const Sebha({super.key});
@@ -16,8 +16,11 @@ class _SebhaState extends State<Sebha> {
   int indexOfAdkar = 0;
   double rotationAngle = 0.0;
 
+  late ThemeProvider themeProvider;
+
   @override
   Widget build(BuildContext context) {
+    themeProvider = Provider.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -35,14 +38,14 @@ class _SebhaState extends State<Sebha> {
                 child: Transform.rotate(
                   angle: rotationAngle * 3.1415926535897932,
                   child: Image.asset(
-                    AppAssets.bodyOfSebha,
+                    themeProvider.sebhabody,
                   ),
                 ),
               ),
               Positioned(
                 top: 10,
                 child: Image.asset(
-                  AppAssets.headOfSebha,
+                  themeProvider.sebhaHead,
                 ),
               ),
             ],
@@ -52,9 +55,9 @@ class _SebhaState extends State<Sebha> {
           flex: 4,
           child: Column(
             children: [
-              const Text(
+              Text(
                 'عدد التسبيحات',
-                style: AppStyles.titleTextStyle,
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(
                 height: 10,
@@ -62,12 +65,12 @@ class _SebhaState extends State<Sebha> {
               Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryColor.withOpacity(0.5),
+                  color: themeProvider.containerSebhaColor.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Text(
                   '$sebhaCounter',
-                  style: AppStyles.titleTextStyle,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
               const SizedBox(
@@ -77,16 +80,13 @@ class _SebhaState extends State<Sebha> {
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
+                  color: themeProvider.containerSebhaColor.withOpacity(0.7),
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Text(
-                  '${AppConstans.adkar[indexOfAdkar]}',
+                  AppConstans.adkar[indexOfAdkar],
                   textDirection: TextDirection.rtl,
-                  style: AppStyles.titleTextStyle.copyWith(
-                      color: AppColors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w400),
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
             ],

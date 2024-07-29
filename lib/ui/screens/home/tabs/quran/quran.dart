@@ -39,20 +39,20 @@ class Quran extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                   Row(
+                  Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Expanded(
                         child: Text(
                           context.local.suraName,
-                          style: AppStyles.titleTextStyle,
+                          style: Theme.of(context).textTheme.displayLarge,
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Expanded(
                         child: Text(
                           context.local.verses,
-                          style: AppStyles.titleTextStyle,
+                          style: Theme.of(context).textTheme.displayLarge,
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -94,13 +94,13 @@ class Quran extends StatelessWidget {
               Expanded(
                   child: Text(
                 '${AppConstans.suraNames[index]}',
-                style: AppStyles.titleTextStyle,
+                style: Theme.of(context).textTheme.displayLarge,
                 textAlign: TextAlign.center,
               )),
               Expanded(
                   child: Text(
                 '${AppConstans.versesNumber[index]}',
-                style: AppStyles.titleTextStyle,
+                style: Theme.of(context).textTheme.displayLarge,
                 textAlign: TextAlign.center,
               )),
             ],

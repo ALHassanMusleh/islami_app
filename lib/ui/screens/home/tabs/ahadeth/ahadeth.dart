@@ -51,13 +51,13 @@ class _AhadethState extends State<Ahadeth> {
                   const SizedBox(
                     height: 8,
                   ),
-                  Row(
+                   Row(
                     children: [
                       Expanded(
                         child: Text(
                           context.local.hadethName,
                           textAlign: TextAlign.center,
-                          style: AppStyles.titleTextStyle,
+                          style: Theme.of(context).textTheme.displayLarge,
                         ),
                       ),
                     ],
@@ -110,7 +110,7 @@ class _AhadethState extends State<Ahadeth> {
                         child: Text(
                       hadethList[index].title,
                       textAlign: TextAlign.center,
-                      style: AppStyles.titleTextStyle,
+                      style:Theme.of(context).textTheme.displayLarge,
                     )),
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/ui/providers/theme_provider.dart';
 import 'package:islami_app/ui/screens/home/tabs/ahadeth/ahadeth.dart';
 import 'package:islami_app/ui/screens/home/tabs/quran/quran.dart';
 import 'package:islami_app/ui/screens/home/tabs/radio/app_radio.dart';
@@ -8,6 +9,7 @@ import 'package:islami_app/ui/utils/app_assets.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:islami_app/ui/utils/extensions/build_context_extensions.dart';
 import 'package:islami_app/ui/widgets/app_scaffold.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   static const String routeName = 'Home';
@@ -21,10 +23,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int selectedTabIndex = 0;
   List<Widget> tabs = [Quran(), Ahadeth(), Sebha(), AppRadio(), Settings()];
+  late ThemeProvider themeProvider;
   @override
   Widget build(BuildContext context) {
+    themeProvider = Provider.of(context);
     // X().
     return AppScaffold(
+
       appBarTitle: context.local.islami,
       body: tabs[selectedTabIndex],
       bottomNavigationBar: buildBottomNavigation(),
@@ -93,11 +98,9 @@ class _HomeState extends State<Home> {
 
   Theme buildBottomNavigation() {
     return Theme(
-      data: ThemeData(canvasColor: AppColors.primaryColor),
+      data: Theme.of(context).copyWith(canvasColor: themeProvider.primaryColor),
       child: BottomNavigationBar(
-        selectedItemColor: AppColors.accentColor,
-        selectedIconTheme: const IconThemeData(size: 38),
-        unselectedIconTheme: const IconThemeData(size: 34),
+
         currentIndex: selectedTabIndex,
         onTap: (index) {
           selectedTabIndex = index;

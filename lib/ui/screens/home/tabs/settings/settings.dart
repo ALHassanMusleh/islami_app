@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/ui/providers/language_provider.dart';
+import 'package:islami_app/ui/providers/theme_provider.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:islami_app/ui/utils/app_styles.dart';
 import 'package:islami_app/ui/utils/extensions/build_context_extensions.dart';
@@ -14,12 +15,14 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   // String selectedLanguage = "en";
-  bool isDarkThemeEnable = false;
+  // bool isDarkThemeEnable = false;
   late LanguageProvider provider;
+  late ThemeProvider themeProvider;
 
   @override
   Widget build(BuildContext context) {
     provider = Provider.of(context);
+    themeProvider = Provider.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16.0),
       child: Column(
@@ -27,7 +30,7 @@ class _SettingsState extends State<Settings> {
         children: [
           Text(
             context.local.language,
-            style: AppStyles.titleTextStyle,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
           SizedBox(
             height: 10,
@@ -86,13 +89,15 @@ class _SettingsState extends State<Settings> {
         children: [
           Text(
             context.local.theme,
-            style: AppStyles.titleTextStyle,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
           Switch(
             activeColor: AppColors.primaryColor,
-            value: isDarkThemeEnable,
+            // value: isDarkThemeEnable,
+            value: themeProvider.isDarkThemeEnables,
             onChanged: (value) {
-              isDarkThemeEnable = value;
+              // isDarkThemeEnable = value;
+              themeProvider.newTheme = value ? ThemeMode.dark : ThemeMode.light;
               setState(() {});
             },
           ),

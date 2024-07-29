@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/ui/providers/theme_provider.dart';
 import 'package:islami_app/ui/screens/home/home.dart';
 import 'package:islami_app/ui/utils/app_assets.dart';
+import 'package:provider/provider.dart';
 
 class Splash extends StatefulWidget {
   static const String routeName = 'Splash';
@@ -24,12 +26,15 @@ class _SplashState extends State<Splash> {
     super.initState();
   }
 
+  late ThemeProvider themeProvider;
+
   @override
   Widget build(BuildContext context) {
+    themeProvider = Provider.of(context);
     print('build'); // build method in emlator run 2 times
     return Scaffold(
       body: Image.asset(
-        AppAssets.splash,
+        themeProvider.mainSplashBackground,
         fit: BoxFit.cover,
         width: double.infinity,
       ),
