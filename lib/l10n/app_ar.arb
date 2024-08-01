@@ -9,5 +9,8 @@
   "sebha" : "سبحة",
   "suraName" : "اسم السورة",
   "verses" : "عدد الايات",
-  "hadethName" : "اسم الحديث"
+  "hadethName" : "اسم الحديث",
+  "fontSize" : "حجم الخط",
+  "numberOfTasbeh" : "عدد التسبيحات"
+
 }

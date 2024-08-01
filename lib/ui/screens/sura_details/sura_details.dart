@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/model/suta_details_args.dart';
+import 'package:islami_app/ui/providers/font_size_provider.dart';
 import 'package:islami_app/ui/providers/theme_provider.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:islami_app/ui/utils/app_styles.dart';
@@ -18,11 +19,15 @@ class SuraDetails extends StatefulWidget {
 class _SuraDetailsState extends State<SuraDetails> {
   late SuraDetailsArgs args;
   late ThemeProvider themeProvider;
+  late FontSizeProvider fontSizeProvider;
+
   String fileContent = "";
+  List<String> listLines =[];
 
   @override
   Widget build(BuildContext context) {
     themeProvider = Provider.of(context);
+    fontSizeProvider = Provider.of(context);
     print('build');
     args = ModalRoute.of(context)!.settings.arguments as SuraDetailsArgs;
     print(args.fileName);
@@ -45,16 +50,17 @@ class _SuraDetailsState extends State<SuraDetails> {
 
   Center buildLoading() {
     return const Center(
-        child: CircularProgressIndicator(
-      color: AppColors.primaryColor,
-    ));
+      child: CircularProgressIndicator(
+        color: AppColors.primaryColor,
+      ),
+    );
   }
 
   Widget buildSuraContent() => Center(
         child: Container(
-          height: MediaQuery.of(context).size.height * .8,
-          width: MediaQuery.of(context).size.width * .9,
-          padding: const EdgeInsets.all(20),
+          height: MediaQuery.of(context).size.height * .9,
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: themeProvider.containerColor,
             borderRadius: BorderRadius.circular(25),
@@ -63,21 +69,43 @@ class _SuraDetailsState extends State<SuraDetails> {
             child: Column(
               children: [
                 if (args.suraName != "التوبة")
-                   Text(
+                  Text(
                     'بسم الله الرحمن الرحيم',
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(fontFamily: 'quran_font'),
                   ),
                 const Divider(
                   thickness: 3,
                   height: 2,
                   color: AppColors.primaryColor,
                 ),
+                const SizedBox(height: 15,),
                 Text(
                   fileContent,
                   textDirection: TextDirection.rtl,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.displayLarge!.copyWith(fontSize: 20),
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayLarge!
+                      .copyWith(fontSize: fontSizeProvider.selectedFontSize,fontFamily: 'quran_font'),
                 ),
+
+                // Expanded(
+                //   child: ListView.separated(itemBuilder: (context,index) =>Text(listLines[index],
+                //       textDirection: TextDirection.rtl,
+                //         textAlign: TextAlign.center,
+                //       style: Theme.of(context)
+                //           .textTheme
+                //           .displayLarge!
+                //           .copyWith(fontSize: 20,fontFamily: 'quran_font')),itemCount: listLines.length,separatorBuilder: (context,index)=>Container(
+                //     margin: EdgeInsets.symmetric(horizontal: 30),
+                //     padding: EdgeInsets.all(10),
+                //
+                //     child: Divider(
+                //       thickness:1.5,
+                //       height: 2,
+                //       color: AppColors.primaryColor,),
+                //   ),),
+                // ),
               ],
             ),
           ),
@@ -130,7 +158,7 @@ class _SuraDetailsState extends State<SuraDetails> {
     // Second way to deal with future
     fileContent =
         await rootBundle.loadString("assets/files/quran/${args.fileName}");
-    List<String> listLines = fileContent.split("\n");
+    listLines = fileContent.split("\n");
     listLines = listLines.where((line) => line.trim().isNotEmpty).toList();
     for (int i = 0; i < listLines.length; i++) {
       listLines[i] += "(${i + 1}) ";

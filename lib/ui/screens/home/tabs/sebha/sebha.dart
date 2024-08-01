@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/ui/providers/language_provider.dart';
 import 'package:islami_app/ui/providers/theme_provider.dart';
 
 import 'package:islami_app/ui/utils/app_constans.dart';
+import 'package:islami_app/ui/utils/extensions/build_context_extensions.dart';
 import 'package:provider/provider.dart';
 
 class Sebha extends StatefulWidget {
@@ -56,7 +58,7 @@ class _SebhaState extends State<Sebha> {
           child: Column(
             children: [
               Text(
-                'عدد التسبيحات',
+          context.local.numberOfTasbeh,
                 style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(

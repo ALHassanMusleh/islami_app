@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/ui/providers/font_size_provider.dart';
 import 'package:islami_app/ui/providers/language_provider.dart';
 import 'package:islami_app/ui/providers/theme_provider.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
@@ -16,13 +17,16 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   // String selectedLanguage = "en";
   // bool isDarkThemeEnable = false;
+  double fontSize = 10.0;
   late LanguageProvider provider;
   late ThemeProvider themeProvider;
+  late FontSizeProvider fontSizeProvider;
 
   @override
   Widget build(BuildContext context) {
     provider = Provider.of(context);
     themeProvider = Provider.of(context);
+    fontSizeProvider = Provider.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16.0),
       child: Column(
@@ -40,6 +44,27 @@ class _SettingsState extends State<Settings> {
             height: 10,
           ),
           buildThemeSwitch(),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            context.local.fontSize,
+            style: Theme.of(context).textTheme.displayLarge,
+          ),
+          Slider(
+            activeColor: AppColors.primaryColor,
+            inactiveColor: Colors.black,
+            min: 10.0,
+            max: 100.0,
+            value: fontSizeProvider.selectedFontSize,
+            divisions: 9,
+            label: '${fontSizeProvider.selectedFontSize.round()}',
+            onChanged: (value) {
+              setState(() {
+                fontSizeProvider.setFontSize = value;
+              });
+            },
+          )
         ],
       ),
     );

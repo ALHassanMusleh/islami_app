@@ -9,5 +9,8 @@
     "sebha" : "Sebha",
     "suraName" : "Sura Name",
     "verses" : "Verses",
-    "hadethName" : "Hadeth Name"
+    "hadethName" : "Hadeth Name",
+    "fontSize" : "Font Size",
+    "numberOfTasbeh" : "Number Of Tasbeh"
+
 }
