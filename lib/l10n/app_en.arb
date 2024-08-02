@@ -11,6 +11,8 @@
     "verses" : "Verses",
     "hadethName" : "Hadeth Name",
     "fontSize" : "Font Size",
-    "numberOfTasbeh" : "Number Of Tasbeh"
+    "numberOfTasbeh" : "Number Of Tasbeh",
+    "ayaIsCopied" : "Aya is Copied"
+
 
 }

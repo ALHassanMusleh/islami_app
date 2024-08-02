@@ -11,6 +11,7 @@
   "verses" : "عدد الايات",
   "hadethName" : "اسم الحديث",
   "fontSize" : "حجم الخط",
-  "numberOfTasbeh" : "عدد التسبيحات"
+  "numberOfTasbeh" : "عدد التسبيحات",
+  "ayaIsCopied" : "تم نسخ الاُية"
 
 }

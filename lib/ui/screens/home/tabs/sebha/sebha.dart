@@ -55,43 +55,48 @@ class _SebhaState extends State<Sebha> {
         ),
         Expanded(
           flex: 4,
-          child: Column(
-            children: [
-              Text(
-          context.local.numberOfTasbeh,
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.all(18),
-                decoration: BoxDecoration(
-                  color: themeProvider.containerSebhaColor.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: Text(
-                  '$sebhaCounter',
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  context.local.numberOfTasbeh,
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.all(10),
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  color: themeProvider.containerSebhaColor.withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(25),
+                const SizedBox(
+                  height: 10,
                 ),
-                child: Text(
-                  AppConstans.adkar[indexOfAdkar],
-                  textDirection: TextDirection.rtl,
-                  style: Theme.of(context).textTheme.displayLarge,
+                Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: themeProvider.containerSebhaColor.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Text(
+                    '$sebhaCounter',
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: themeProvider.containerSebhaColor.withOpacity(0.7),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Text(
+                    AppConstans.adkar[indexOfAdkar],
+                    textDirection: TextDirection.rtl,
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayLarge!
+                        .copyWith(fontSize: 22),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],

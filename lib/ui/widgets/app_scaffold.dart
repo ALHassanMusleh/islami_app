@@ -9,8 +9,15 @@ class AppScaffold extends StatelessWidget {
   final Widget? body;
   final String? appBarTitle;
   final Widget? bottomNavigationBar;
+  final Widget? action;
+  final bool suraTab;
   AppScaffold(
-      {super.key, this.body, this.appBarTitle, this.bottomNavigationBar});
+      {super.key,
+      this.body,
+      this.appBarTitle,
+      this.bottomNavigationBar,
+      this.action,
+      this.suraTab = false});
 
   late ThemeProvider themeProvider;
   @override
@@ -32,6 +39,9 @@ class AppScaffold extends StatelessWidget {
             appBarTitle ?? "",
           ),
           centerTitle: true,
+          actions: [
+            suraTab ? action! : Container(),
+          ],
         ),
         body: body,
         bottomNavigationBar: bottomNavigationBar,

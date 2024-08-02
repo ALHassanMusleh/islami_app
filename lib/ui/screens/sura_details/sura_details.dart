@@ -1,10 +1,12 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/model/suta_details_args.dart';
 import 'package:islami_app/ui/providers/font_size_provider.dart';
 import 'package:islami_app/ui/providers/theme_provider.dart';
 import 'package:islami_app/ui/utils/app_colors.dart';
-import 'package:islami_app/ui/utils/app_styles.dart';
+import 'package:islami_app/ui/utils/extensions/build_context_extensions.dart';
+import 'package:islami_app/ui/utils/show_snack_bar.dart';
 import 'package:islami_app/ui/widgets/app_scaffold.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +24,8 @@ class _SuraDetailsState extends State<SuraDetails> {
   late FontSizeProvider fontSizeProvider;
 
   String fileContent = "";
-  List<String> listLines =[];
+  List<String> listLines = [];
+  bool fullSura = true;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,18 @@ class _SuraDetailsState extends State<SuraDetails> {
     if (fileContent.isEmpty) readFile();
     return AppScaffold(
       appBarTitle: args.suraName,
-      body: fileContent.isEmpty ? buildLoading() : buildSuraContent(),
+      suraTab: true,
+      action: IconButton(
+        icon: Icon(
+          Icons.switch_access_shortcut_add,
+          color: AppColors.primaryColor,
+        ),
+        onPressed: () {
+          fullSura = !fullSura;
+          setState(() {});
+        },
+      ),
+      body: fullSura ? buildFullSuraContent() : buildAyaOfSura(),
     );
     // return Scaffold(
     //   appBar: AppBar(
@@ -56,61 +70,102 @@ class _SuraDetailsState extends State<SuraDetails> {
     );
   }
 
-  Widget buildSuraContent() => Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height * .9,
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: themeProvider.containerColor,
-            borderRadius: BorderRadius.circular(25),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                if (args.suraName != "التوبة")
-                  Text(
-                    'بسم الله الرحمن الرحيم',
-                    style: Theme.of(context).textTheme.displayLarge!.copyWith(fontFamily: 'quran_font'),
+  Widget buildFullSuraContent() => fileContent.isEmpty
+      ? buildLoading()
+      : Center(
+          child: Container(
+            height: MediaQuery.of(context).size.height * .9,
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: themeProvider.containerColor,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  if (args.suraName != "التوبة")
+                    Text(
+                      'بسم الله الرحمن الرحيم',
+                      style: Theme.of(context)
+                          .textTheme
+                          .displayLarge!
+                          .copyWith(fontFamily: 'quran_font'),
+                    ),
+                  const Divider(
+                    thickness: 3,
+                    height: 2,
+                    color: AppColors.primaryColor,
                   ),
-                const Divider(
-                  thickness: 3,
-                  height: 2,
-                  color: AppColors.primaryColor,
-                ),
-                const SizedBox(height: 15,),
-                Text(
-                  fileContent,
-                  textDirection: TextDirection.rtl,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayLarge!
-                      .copyWith(fontSize: fontSizeProvider.selectedFontSize,fontFamily: 'quran_font'),
-                ),
-
-                // Expanded(
-                //   child: ListView.separated(itemBuilder: (context,index) =>Text(listLines[index],
-                //       textDirection: TextDirection.rtl,
-                //         textAlign: TextAlign.center,
-                //       style: Theme.of(context)
-                //           .textTheme
-                //           .displayLarge!
-                //           .copyWith(fontSize: 20,fontFamily: 'quran_font')),itemCount: listLines.length,separatorBuilder: (context,index)=>Container(
-                //     margin: EdgeInsets.symmetric(horizontal: 30),
-                //     padding: EdgeInsets.all(10),
-                //
-                //     child: Divider(
-                //       thickness:1.5,
-                //       height: 2,
-                //       color: AppColors.primaryColor,),
-                //   ),),
-                // ),
-              ],
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    fileContent,
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                        fontSize: fontSizeProvider.selectedFontSize,
+                        fontFamily: 'quran_font'),
+                  ),
+                ],
+              ),
             ),
           ),
+        );
+
+  Widget buildAyaOfSura() {
+    return ListView.builder(
+      itemBuilder: (context, index) => Container(
+        decoration: BoxDecoration(
+          color: AppColors.transparent,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: AppColors.primaryColor,
+            width: 2,
+          ),
         ),
-      );
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {
+                FlutterClipboard.copy(listLines[index])
+                    .then((value) => showSnackBar(context, context.local.ayaIsCopied));
+              },
+              icon: Icon(
+                Icons.copy_rounded,
+                color: AppColors.primaryColor,
+              ),
+            ),
+            Expanded(
+              child: Text(
+                listLines[index],
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .displayLarge!
+                    .copyWith(fontSize: 26, fontFamily: 'quran_font'),
+              ),
+            ),
+          ],
+        ),
+      ),
+      itemCount: listLines.length,
+      // separatorBuilder: (context, index) => Container(
+      //   margin: EdgeInsets.symmetric(horizontal: 30),
+      //   padding: EdgeInsets.all(10),
+      //   child: Divider(
+      //     thickness: 1.5,
+      //     height: 2,
+      //     color: AppColors.primaryColor,
+      //   ),
+      // ),
+    );
+  }
 
   // RichText(
   // textDirection: TextDirection.rtl,
